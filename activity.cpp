@@ -76,6 +76,10 @@ int send_intent(struct su_initiator *from, struct su_request *to, const char *so
         data.writeInt32(0);
     }
     { /* Extras */
+        if (sdk_version > 14) {
+            data.writeInt32(0); // added in ICS 4.0.3
+        }
+
         data.writeInt32(-1); /* dummy, will hold length */
         int oldPos = data.dataPosition();
         data.writeInt32(0x4C444E42); // 'B' 'N' 'D' 'L'
